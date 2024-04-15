@@ -637,9 +637,7 @@ class ImageFunctions(DNNFunctions):
                 self.sam_min_y = min_y
                 self.sam_max_x = max_x
                 self.sam_max_y = max_y
-
-
-                
+           
     # def _mouseDoubleClick(self, event):
     #     self.startOrEndSAM()
     
