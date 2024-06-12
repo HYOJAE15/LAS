@@ -19,6 +19,7 @@ from .ui_functions import UIFunctions
 
 class ProjectClassWindow(QMainWindow, UIFunctions):
     def __init__(self):
+        print(f"ProjectClassWindow")
         QMainWindow.__init__(self)
 
         self.ui = Ui_ProjectClass()
@@ -163,6 +164,16 @@ class ProjectFunctions(object):
             
         with open(os.path.join(path, createProjectFile_name), 'w') as fp:
             json.dump(self.new_project_info, fp)
+        
+        city_gt = os.path.join(path, "gtFine")
+        print(f"city_gt: {city_gt}")
+        os.makedirs(city_gt , exist_ok=True)
+
+        city_img = os.path.join(path, "leftImg8bit")
+        print(f"city_img: {city_img}")
+        os.makedirs(city_img , exist_ok=True)
+
+
 
         self.projectClass.close()
 

@@ -719,7 +719,6 @@ class Ui_ProjectName(object):
         self.datasetComboBox = QComboBox(self.pagesContainer)
         self.datasetComboBox.addItem("")
         self.datasetComboBox.addItem("")
-        self.datasetComboBox.addItem("")
         self.datasetComboBox.setObjectName(u"datasetComboBox")
         self.datasetComboBox.setGeometry(QRect(40, 50, 361, 31))
 
@@ -806,9 +805,8 @@ class Ui_ProjectName(object):
         self.nextButton.setText(QCoreApplication.translate("ProjectName", u"Create", None))
         self.lineFolder.setText("")
         self.lineFolder.setPlaceholderText(QCoreApplication.translate("ProjectName", u"Type here", None))
-        self.datasetComboBox.setItemText(0, QCoreApplication.translate("ProjectName", u"KCQR", None))
-        self.datasetComboBox.setItemText(1, QCoreApplication.translate("ProjectName", u"Harbor2k", None))
-        self.datasetComboBox.setItemText(2, QCoreApplication.translate("ProjectName", u"UOSCD", None))
+        self.datasetComboBox.setItemText(0, QCoreApplication.translate("ProjectName", u"UOSCD", None))
+        self.datasetComboBox.setItemText(1, QCoreApplication.translate("ProjectName", u"KEC", None))
 
         self.creditsLabel.setText(QCoreApplication.translate("ProjectName", u"CHALK", None))
         self.version.setText(QCoreApplication.translate("ProjectName", u"v1.0.0", None))
