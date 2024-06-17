@@ -168,10 +168,19 @@ class ProjectFunctions(object):
         city_gt = os.path.join(path, "gtFine")
         print(f"city_gt: {city_gt}")
         os.makedirs(city_gt , exist_ok=True)
+        
+        subfolders = ["train", "val", "test"]
+        for subfolder in subfolders:
+            city_gt_subfolder = os.path.join(city_gt, subfolder)
+            os.makedirs(city_gt_subfolder, exist_ok=True)
 
         city_img = os.path.join(path, "leftImg8bit")
         print(f"city_img: {city_img}")
         os.makedirs(city_img , exist_ok=True)
+        
+        for subfolder in subfolders:
+            city_img_subfolder = os.path.join(city_img, subfolder)
+            os.makedirs(city_img_subfolder, exist_ok=True)        
 
 
 
