@@ -168,8 +168,6 @@ class ProjectFunctions(object):
         city_gt = os.path.join(path, "gtFine")
         os.makedirs(city_gt , exist_ok=True)
         
-        # test with HJ
-        
         subfolders = ["train", "val", "test"]
         for subfolder in subfolders:
             city_gt_subfolder = os.path.join(city_gt, subfolder)
