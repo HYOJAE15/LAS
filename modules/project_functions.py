@@ -166,7 +166,6 @@ class ProjectFunctions(object):
             json.dump(self.new_project_info, fp)
         
         city_gt = os.path.join(path, "gtFine")
-        print(f"city_gt: {city_gt}")
         os.makedirs(city_gt , exist_ok=True)
         
         subfolders = ["train", "val", "test"]
@@ -175,7 +174,6 @@ class ProjectFunctions(object):
             os.makedirs(city_gt_subfolder, exist_ok=True)
 
         city_img = os.path.join(path, "leftImg8bit")
-        print(f"city_img: {city_img}")
         os.makedirs(city_img , exist_ok=True)
         
         for subfolder in subfolders:
