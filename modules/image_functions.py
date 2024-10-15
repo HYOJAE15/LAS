@@ -19,12 +19,14 @@ from .ui_erase_menu import Ui_EraseMenu
 from .app_settings import Settings
 from .dnn_functions import DNNFunctions
 
-from .utils import imread, cvtArrayToQImage, cvtPixmapToArray, convertLabelToColorMap, blendImageWithColorMap, getPrompt
-from .utils_img import (
-    getScaledPoint, getScaledPoint_mmdet, getCoordBTWTwoPoints, applyBrushSize, readImageToPixmap, histEqualization_gr, histEqualization_hsv, histEqualization_ycc
-)
-
-from modules.utils import imwrite_colormap
+from .utils import imread, cvtArrayToQImage, cvtPixmapToArray, convertLabelToColorMap
+from .utils_img import (getScaledPoint,
+                        getCoordBTWTwoPoints,
+                        applyBrushSize,
+                        readImageToPixmap,
+                        histEqualization_gr,
+                        histEqualization_hsv,
+                        histEqualization_ycc)
 
 import skimage.measure
 import skimage.filters
@@ -127,8 +129,6 @@ class ImageFunctions(DNNFunctions):
         mainWidgets.autoLabelButton.clicked.connect(self.checkAutoLabelButton)
         self.use_autolabel = False
 
-        # mainWidgets.classList.itemSelectionChanged.connect(self.convertDNN)
-        self.mmseg_status = False
         self.sam_status = False
 
         """
@@ -157,85 +157,85 @@ class ImageFunctions(DNNFunctions):
         self.sam_y_idx = []
         self.sam_x_idx = []
     
-    def useEnhancement(self, event):
-        """
-        Label Enhancement Tool
-        """
+    # def useEnhancement(self, event):
+    #     """
+    #     Label Enhancement Tool
+    #     """
         
-        event_global = mainWidgets.mainImageViewer.mapFromGlobal(event.globalPos())
+    #     event_global = mainWidgets.mainImageViewer.mapFromGlobal(event.globalPos())
 
-        x, y = getScaledPoint(event_global, self.scale)
+    #     x, y = getScaledPoint(event_global, self.scale)
         
-        if (self.x != x) or (self.y != y) : 
+    #     if (self.x != x) or (self.y != y) : 
 
-            if self.x > x :
-                min_x = x
-                max_x = self.x
-            else :
-                min_x = self.x
-                max_x = x
+    #         if self.x > x :
+    #             min_x = x
+    #             max_x = self.x
+    #         else :
+    #             min_x = self.x
+    #             max_x = x
 
-            if self.y > y :
-                min_y = y
-                max_y = self.y
-            else :
-                min_y = self.y
-                max_y = y
+    #         if self.y > y :
+    #             min_y = y
+    #             max_y = self.y
+    #         else :
+    #             min_y = self.y
+    #             max_y = y
 
-            # get the region of interest
-            img = cvtPixmapToArray(self.pixmap)
-            img_roi = img[min_y:max_y, min_x:max_x, :3]
-            label_roi = self.label[min_y:max_y, min_x:max_x]
-            label_roi = label_roi.astype(np.uint8)
+    #         # get the region of interest
+    #         img = cvtPixmapToArray(self.pixmap)
+    #         img_roi = img[min_y:max_y, min_x:max_x, :3]
+    #         label_roi = self.label[min_y:max_y, min_x:max_x]
+    #         label_roi = label_roi.astype(np.uint8)
 
-            label_roi = self.applyDenseCRF(img_roi, label_roi)
+    #         label_roi = self.applyDenseCRF(img_roi, label_roi)
 
-            self.label[min_y:max_y, min_x:max_x] = label_roi
+    #         self.label[min_y:max_y, min_x:max_x] = label_roi
 
-            # update colormap
-            self.updateColorMap()
+    #         # update colormap
+    #         self.updateColorMap()
 
-        self.x = x
-        self.y = y
+    #     self.x = x
+    #     self.y = y
         
-    def enhanceLabel(self):
-        """
-        Label Enhancement Tool
-        """
-        # get the current image
-        img = cvtPixmapToArray(self.pixmap)
+    # def enhanceLabel(self):
+    #     """
+    #     Label Enhancement Tool
+    #     """
+    #     # get the current image
+    #     img = cvtPixmapToArray(self.pixmap)
 
-        # get binary image of current label
-        current_label = self.label == self.brush_class
+    #     # get binary image of current label
+    #     current_label = self.label == self.brush_class
 
-        # loop through each object in the label
-        labeled = skimage.measure.label(current_label)
+    #     # loop through each object in the label
+    #     labeled = skimage.measure.label(current_label)
 
-        for region in skimage.measure.regionprops(labeled):
+    #     for region in skimage.measure.regionprops(labeled):
 
-            # get the bounding box coordinates
-            min_y, min_x, max_y, max_x = region.bbox
+    #         # get the bounding box coordinates
+    #         min_y, min_x, max_y, max_x = region.bbox
 
-            # get the region of interest
-            img_roi = img[min_y:max_y, min_x:max_x, :3]
-            label_roi = current_label[min_y:max_y, min_x:max_x]
-            label_roi = label_roi.astype(np.uint8)
+    #         # get the region of interest
+    #         img_roi = img[min_y:max_y, min_x:max_x, :3]
+    #         label_roi = current_label[min_y:max_y, min_x:max_x]
+    #         label_roi = label_roi.astype(np.uint8)
 
-            # run the enhancement algorithm
-            label_roi = self.applyDenseCRF(img_roi, label_roi)
+    #         # run the enhancement algorithm
+    #         label_roi = self.applyDenseCRF(img_roi, label_roi)
 
-            # remain only the largest object
-            label_roi = skimage.measure.label(label_roi)
-            label_roi = label_roi == np.argmax(np.bincount(label_roi.flat)[1:]) + 1
+    #         # remain only the largest object
+    #         label_roi = skimage.measure.label(label_roi)
+    #         label_roi = label_roi == np.argmax(np.bincount(label_roi.flat)[1:]) + 1
 
-            # smooth the label
-            label_roi = skimage.morphology.binary_closing(label_roi, skimage.morphology.square(3))
+    #         # smooth the label
+    #         label_roi = skimage.morphology.binary_closing(label_roi, skimage.morphology.square(3))
 
-            # update the label
-            self.label[min_y:max_y, min_x:max_x] = label_roi * self.brush_class
+    #         # update the label
+    #         self.label[min_y:max_y, min_x:max_x] = label_roi * self.brush_class
 
-        # update colormap
-        self.updateColorMap()
+    #     # update colormap
+    #     self.updateColorMap()
 
     def set_button_state(self, use_autolabel=False, use_refinement=False, use_brush=False, use_erase=False):
         """
@@ -263,39 +263,16 @@ class ImageFunctions(DNNFunctions):
             
             if hasattr(self, 'EraseMenu'):
                 self.EraseMenu.close()  
+            
             if hasattr(self, 'BrushMenu'):
                 self.BrushMenu.close()  
-
-            # if self.brush_class == 1:
-            #     if hasattr(self, 'mmseg_model') == False :
-            #         self.load_mmseg(self.mmseg_config, self.mmseg_checkpoint)
-            # else:
-            #     if hasattr(self, 'sam_model') == False :
-            #         self.load_sam(self.sam_checkpoint) 
-
+            
             if self.brush_class != 0:
                 if hasattr(self, 'sam_model') == False :
                         self.load_sam(self.sam_checkpoint) 
 
-
         elif self.use_autolabel == True:
             self.set_button_state()
-
-    def convertDNN (self):
-        """
-        convert deep learning model among mmseg & sam
-        current brush class is the class before the change
-        """
-        if self.use_autolabel :
-            
-            if self.brush_class == 1 :
-                if hasattr(self, 'sam_model') == False :
-                    self.load_sam(self.sam_checkpoint)
-    
-            else :
-                if hasattr(self, 'mmseg_model') == False :
-                    self.load_mmseg(self.mmseg_config, self.mmseg_checkpoint)
-
                 
     def openBrushMenu(self):
         """
@@ -452,54 +429,54 @@ class ImageFunctions(DNNFunctions):
                 self.sam_y_idx = []
 
         
-    def useGrabCut(self, event):
-        """
-        Label Enhancement Tool
-        """
-        import cv2
+    # def useGrabCut(self, event):
+    #     """
+    #     Label Enhancement Tool
+    #     """
+    #     import cv2
         
-        event_global = mainWidgets.mainImageViewer.mapFromGlobal(event.globalPos())
+    #     event_global = mainWidgets.mainImageViewer.mapFromGlobal(event.globalPos())
 
-        x, y = getScaledPoint(event_global, self.scale)
+    #     x, y = getScaledPoint(event_global, self.scale)
         
-        if (self.x != x) or (self.y != y) : 
+    #     if (self.x != x) or (self.y != y) : 
 
-            if self.x > x :
-                min_x = x
-                max_x = self.x
-            else :
-                min_x = self.x
-                max_x = x
+    #         if self.x > x :
+    #             min_x = x
+    #             max_x = self.x
+    #         else :
+    #             min_x = self.x
+    #             max_x = x
 
-            if self.y > y :
-                min_y = y
-                max_y = self.y
-            else :
-                min_y = self.y
-                max_y = y
+    #         if self.y > y :
+    #             min_y = y
+    #             max_y = self.y
+    #         else :
+    #             min_y = self.y
+    #             max_y = y
 
-            # get the region of interest
-            img = cvtPixmapToArray(self.pixmap)
-            img_roi = img[min_y:max_y, min_x:max_x, :3]
-            label_roi = self.label[min_y:max_y, min_x:max_x]
-            label_roi = label_roi.astype(np.uint8)
+    #         # get the region of interest
+    #         img = cvtPixmapToArray(self.pixmap)
+    #         img_roi = img[min_y:max_y, min_x:max_x, :3]
+    #         label_roi = self.label[min_y:max_y, min_x:max_x]
+    #         label_roi = label_roi.astype(np.uint8)
 
-            mask = label_roi == self.brush_class
+    #         mask = label_roi == self.brush_class
             
-            bgdModel = np.zeros((1,65),np.float64)
-            fgdModel = np.zeros((1,65),np.float64)
+    #         bgdModel = np.zeros((1,65),np.float64)
+    #         fgdModel = np.zeros((1,65),np.float64)
 
-            mask, bgdModel, fgdModel = cv2.grabCut(img_roi, mask, None, bgdModel, fgdModel,5, cv2.GC_INIT_WITH_MASK)
+    #         mask, bgdModel, fgdModel = cv2.grabCut(img_roi, mask, None, bgdModel, fgdModel,5, cv2.GC_INIT_WITH_MASK)
 
-            mask = np.where((mask==2)|(mask==0),0,1).astype('uint8')
+    #         mask = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 
-            self.label[min_y:max_y, min_x:max_x] = mask * self.brush_class
+    #         self.label[min_y:max_y, min_x:max_x] = mask * self.brush_class
 
-            # update colormap
-            self.updateColorMap()
+    #         # update colormap
+    #         self.updateColorMap()
 
-        self.x = x
-        self.y = y
+    #     self.x = x
+    #     self.y = y
 
     
     
