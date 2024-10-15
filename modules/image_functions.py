@@ -397,7 +397,6 @@ class ImageFunctions(DNNFunctions):
             gt_img.tofile(os.path.join(img_label_folder, img_gt_filename))
 
         # self.resetTreeView(refreshIndex=True)
-
         
     def resetTreeView(self, refreshIndex = False):
         """Reset the tree view

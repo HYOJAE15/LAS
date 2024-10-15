@@ -213,9 +213,12 @@ class MainWindow(
         
         elif event.key() == 70: # F key
             if self.ControlKey:
-                self.inferenceFullyAutomaticLabeling()
+                print(f"no inferenceFullyAutomaticLabeling")
+                # self.inferenceFullyAutomaticLabeling()
             
             # Filling Hole 
+            
+
 
         elif event.key() == 72: # H key
             # activate scroll move mode 

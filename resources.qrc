@@ -1,10 +1,15 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/images/EXCI.png</file>
     <file>images/images/CHALK_vertical.png</file>
+    <file>images/images/SSSL_Logo-removebg-preview.png</file>
     <file>images/images/PyDracula.png</file>
     <file>images/images/PyDracula_vertical.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>images/icons/icon-EX.png</file>
+    <file>images/icons/SSSL_Logo-icon.png</file>
+    <file>images/icons/SSSL_Logo-removebg-preview.png</file>
     <file>images/icons/icon-open-project.png</file>
     <file>images/icons/icon-enhancement.png</file>
     <file>images/icons/icon-ai.png</file>

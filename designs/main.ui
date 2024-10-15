@@ -712,7 +712,7 @@ Button */
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-image: url(:/icons/images/icons/icon-chalk.png);
+              <string notr="true">image: url(:/icons/images/icons/SSSL_Logo-icon.png);
 background-position: center;
 background-repeat: no-repeat;</string>
              </property>
@@ -2638,7 +2638,7 @@ background-position: left center;
                    </font>
                   </property>
                   <property name="text">
-                   <string>CHALK: Concrete Damage Automatic Labeling ToolKit  </string>
+                   <string>LAS: Labeling Anything by SAM</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2952,7 +2952,7 @@ background-position: left center;
                        <bool>true</bool>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">background-image: url(:/images/images/images/CHALK_vertical.png);
+                       <string notr="true">image: url(:/images/images/images/SSSL_Logo-removebg-preview.png);
 background-position: center;
 background-repeat: no-repeat;</string>
                       </property>
@@ -4595,7 +4595,7 @@ background-repeat: no-repeat;</string>
                    </font>
                   </property>
                   <property name="text">
-                   <string>CHALK</string>
+                   <string>LAS</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
