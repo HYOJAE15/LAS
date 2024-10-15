@@ -213,9 +213,8 @@ class MainWindow(
         
         elif event.key() == 70: # F key
             if self.ControlKey:
-                print(f"no inferenceFullyAutomaticLabeling")
-                # self.inferenceFullyAutomaticLabeling()
-            
+                print(f"no function")
+                
             # Filling Hole 
             
 
@@ -312,7 +311,7 @@ if __name__ == "__main__":
     # os.system("pyside6-uic designs/thumbnail_window.ui -o modules/ui_thumbnail_window.py")  
     
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("icon.ico"))
+    app.setWindowIcon(QIcon("LAS_SSLAB.ico"))
     
     window = MainWindow()
     sys.exit(app.exec())
