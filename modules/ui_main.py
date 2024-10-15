@@ -614,7 +614,7 @@ class Ui_MainWindow(object):
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(-4, -6, 71, 61))
         self.frame.setAutoFillBackground(False)
-        self.frame.setStyleSheet(u"background-image: url(:/icons/images/icons/icon-chalk.png);\n"
+        self.frame.setStyleSheet(u"background-image: url(:/icons/images/icons/LAS_SSLAB.png);\n"
 "background-position: center;\n"
 "background-repeat: no-repeat;")
         self.frame.setFrameShape(QFrame.NoFrame)
@@ -1398,7 +1398,7 @@ class Ui_MainWindow(object):
         self.home = QWidget()
         self.home.setObjectName(u"home")
         self.home.setEnabled(True)
-        self.home.setStyleSheet(u"background-image: url(:/images/images/images/CHALK_vertical.png);\n"
+        self.home.setStyleSheet(u"background-image: url(:/images/images/images/LAS_SSLAB.png);\n"
 "background-position: center;\n"
 "background-repeat: no-repeat;")
         self.stackedWidget.addWidget(self.home)
@@ -2084,7 +2084,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         self.classList.setCurrentRow(-1)
 
 
@@ -2143,7 +2143,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(shortcut)
         self.btn_add_new_project.setText(QCoreApplication.translate("MainWindow", u"Add New Project", None))
         self.btn_open_project.setText(QCoreApplication.translate("MainWindow", u"Open Project", None))
-        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"CHALK: Concrete Damage Automatic Labeling ToolKit  ", None))
+        self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"LAS: Labeling Anything by SAM", None))
 #if QT_CONFIG(tooltip)
         self.openRightToolBox.setToolTip(QCoreApplication.translate("MainWindow", u"Settings", None))
 #endif // QT_CONFIG(tooltip)
@@ -2238,7 +2238,7 @@ class Ui_MainWindow(object):
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
-        self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"CHALK", None))
+        self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"LAS", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.0", None))
     # retranslateUi
 
