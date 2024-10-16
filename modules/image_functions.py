@@ -375,8 +375,6 @@ class ImageFunctions(DNNFunctions):
             _, gt_img = cv2.imencode(".png", gt)
             gt_img.tofile(os.path.join(img_label_folder, img_gt_filename))
 
-        # self.resetTreeView(refreshIndex=True)
-        
     def resetTreeView(self, refreshIndex = False):
         """Reset the tree view
         Args:
@@ -972,13 +970,20 @@ class ImageFunctions(DNNFunctions):
         self.layers = createLayersFromLabel(self.label, len(self.label_palette))
         self.layers[self.brush_class] = ndimage.binary_fill_holes(self.layers[self.brush_class])
 
-        for idx in reversed(range(1, len(self.layers))): 
+        for idx in range(1, len(self.layers)):
             self.label = np.where(self.layers[idx], idx, self.label) 
 
-        # self.colormap = blendImageWithColorMap(self.img, self.label, self.label_palette, self.alpha)
-        # self.pixmap = QPixmap(cvtArrayToQImage(self.colormap))
-        # self.resize_image()
+        # self.label = np.where(self.layers[self.brush_class], self.brush_class, self.label) 
 
+        self.colormap = convertLabelToColorMap(self.label, self.label_palette, self.alpha)
+        self.color_pixmap = QPixmap(cvtArrayToQImage(self.colormap))
+
+        self.color_pixmap_item.setPixmap(QPixmap())
+        self.color_pixmap_item.setPixmap(self.color_pixmap)
+
+    def removeAllLabel(self):
+        self.label = np.zeros((self.img.shape[0], self.img.shape[1]), dtype=np.uint8)
+        
         self.colormap = convertLabelToColorMap(self.label, self.label_palette, self.alpha)
         self.color_pixmap = QPixmap(cvtArrayToQImage(self.colormap))
 

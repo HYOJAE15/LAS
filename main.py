@@ -188,12 +188,16 @@ class MainWindow(
 
         elif event.key() == 69 : # E key
             self.openEraseMenu()
+        
+        elif event.key() == 82 : # R key
+            if self.ControlKey:
+                self.removeAllLabel()
+                imwrite(self.labelPath, self.label)
 
         elif event.key() == 66 : # B key
             self.openBrushMenu()
-        
+
         # elif event.key() == 71 : # G key
-        #     self.checkGrabCutButton()
         
         elif event.key() == 16777249: # Ctrl key
             self.ControlKey = True
