@@ -19,7 +19,6 @@ from .ui_functions import UIFunctions
 
 class ProjectClassWindow(QMainWindow, UIFunctions):
     def __init__(self):
-        print(f"ProjectClassWindow")
         QMainWindow.__init__(self)
 
         self.ui = Ui_ProjectClass()
