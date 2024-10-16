@@ -19,7 +19,7 @@ from .ui_erase_menu import Ui_EraseMenu
 from .app_settings import Settings
 from .dnn_functions import DNNFunctions
 
-from .utils import imread, cvtArrayToQImage, cvtPixmapToArray, convertLabelToColorMap
+from .utils import *
 from .utils_img import (getScaledPoint,
                         getCoordBTWTwoPoints,
                         applyBrushSize,
@@ -30,6 +30,8 @@ from .utils_img import (getScaledPoint,
 
 import skimage.measure
 import skimage.filters
+
+from scipy import ndimage
 
 import copy
 
@@ -963,3 +965,22 @@ class ImageFunctions(DNNFunctions):
 
         self.x = x
         self.y = y
+
+    def fillHole(self):
+
+        self.img = cvtPixmapToArray(self.pixmap) 
+        self.layers = createLayersFromLabel(self.label, len(self.label_palette))
+        self.layers[self.brush_class] = ndimage.binary_fill_holes(self.layers[self.brush_class])
+
+        for idx in reversed(range(1, len(self.layers))): 
+            self.label = np.where(self.layers[idx], idx, self.label) 
+
+        # self.colormap = blendImageWithColorMap(self.img, self.label, self.label_palette, self.alpha)
+        # self.pixmap = QPixmap(cvtArrayToQImage(self.colormap))
+        # self.resize_image()
+
+        self.colormap = convertLabelToColorMap(self.label, self.label_palette, self.alpha)
+        self.color_pixmap = QPixmap(cvtArrayToQImage(self.colormap))
+
+        self.color_pixmap_item.setPixmap(QPixmap())
+        self.color_pixmap_item.setPixmap(self.color_pixmap)

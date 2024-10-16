@@ -151,13 +151,11 @@ def generateForNumberOfWindows(data, dimOrder, windowCount, overlapPercent, tran
 def blendImageWithColorMap(
         image, 
         label, 
-        palette = np.array([
-            [0, 0, 0],
-            [0, 0, 255],
-            [0, 255, 0],
-            [0, 255, 255], 
-            [255, 0, 0]
-            ]), 
+        palette = np.array([[0, 0, 0],
+                            [0, 0, 255],
+                            [0, 255, 0],
+                            [0, 255, 255],
+                            [255, 0, 0]]), 
         alpha = 0.5
         ):
     """ blend image with color map 

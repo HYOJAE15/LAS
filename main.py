@@ -214,7 +214,9 @@ class MainWindow(
                 print(f"no function")
                 
             # Filling Hole 
-            
+            else :
+                print(f"filiing works")
+                self.fillHole()
 
 
         elif event.key() == 72: # H key
